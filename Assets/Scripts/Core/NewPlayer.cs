@@ -73,6 +73,7 @@ public class NewPlayer : PhysicsObject
         //if we press "Fire1" then set the attack box to active otherwise set active to false
         if (Input.GetButtonDown("Fire1"))
         {
+            animator.SetTrigger("attack");
             StartCoroutine(ActivateAttack());
         }
 
@@ -84,6 +85,7 @@ public class NewPlayer : PhysicsObject
         animator.SetFloat("velocityX" , MathF.Abs(velocity.x / maxSpeed));
         animator.SetFloat("velocityY" , velocity.y);
         animator.SetBool("grounded", grounded);
+        animator.SetFloat("attackDirectionY" , Input.GetAxis("Vertical"));
     }
 
     //Activate Attack Function
