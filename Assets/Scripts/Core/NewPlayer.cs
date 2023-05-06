@@ -74,7 +74,7 @@ public class NewPlayer : PhysicsObject
         if (Input.GetButtonDown("Fire1"))
         {
             animator.SetTrigger("attack");
-            StartCoroutine(ActivateAttack());
+            //StartCoroutine(ActivateAttack());
         }
 
         //Check if player health is smaller than or equal to 0.
@@ -89,12 +89,12 @@ public class NewPlayer : PhysicsObject
     }
 
     //Activate Attack Function
-    public IEnumerator ActivateAttack()
+    /*public IEnumerator ActivateAttack()
     {
         attackBox.SetActive(true);
         yield return new WaitForSeconds(attackDuration);
         attackBox.SetActive(false);
-    }
+    }*/
 
     //Update UI elements
     public void UpdateUI()
