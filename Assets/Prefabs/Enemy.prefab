@@ -171,3 +171,7 @@ MonoBehaviour:
   rayCastLength: 1
   attackPower: 10
   health: 100
+  hurtSound: {fileID: 8300000, guid: 827213ae71917459b9c9368275ce2059, type: 3}
+  deathSound: {fileID: 8300000, guid: 189a5e80d552942d2b1c84853d3543b2, type: 3}
+  hurtSoundVolume: 0.4
+  deathSoundVolume: 0.3

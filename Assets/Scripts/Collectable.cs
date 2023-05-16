@@ -8,6 +8,8 @@ public class Collectable : MonoBehaviour
     [SerializeField] private ItemType itemType;
     [SerializeField] private string inventoryStringName;
     [SerializeField] private Sprite inventorySprite;
+    [SerializeField] private AudioClip collectionSound;
+    [SerializeField] private float collectionSoundVolume = 1f;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class Collectable : MonoBehaviour
     {
         if (collision.gameObject == NewPlayer.Instance.gameObject)
         {
+            if(collectionSound) NewPlayer.Instance.sfxAudiosource.PlayOneShot(collectionSound,collectionSoundVolume*Random.Range(0.8f,1.4f));
             if(itemType == ItemType.Coin)
             {
                 NewPlayer.Instance.coinsCollected += 1;

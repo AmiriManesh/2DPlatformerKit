@@ -27,6 +27,10 @@ public class NewPlayer : PhysicsObject
     public Sprite inventoryItemBlank; // The default inventory item slot sprite
     public Sprite keySprite; // The key inventory item
     public Sprite keyGemSprite; // The Gem key inventory item
+    
+    public AudioSource sfxAudiosource;
+    public AudioSource musicAudiosource;
+    public AudioSource ambienceAudiosource;
 
     //Singleton instantation
     private static NewPlayer instance;
@@ -126,5 +130,12 @@ public class NewPlayer : PhysicsObject
         inventory.Remove(inventoryname);
         //blank sprite should now swap with key sprite
         GameManager.Instance.inventoryItemImage.sprite = inventoryItemBlank;
+    }
+
+    public void Hurt()
+    {
+        animator.SetTrigger("hurt");
+        NewPlayer.instance.health -= attackPower;
+        NewPlayer.instance.UpdateUI();
     }
 }

@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4140607898546154310
 SpriteRenderer:
@@ -146,3 +146,5 @@ MonoBehaviour:
   itemType: 1
   inventoryStringName: 
   inventorySprite: {fileID: 0}
+  collectionSound: {fileID: 8300000, guid: 58dff34f4d07e48b9a198cf58466ae71, type: 3}
+  collectionSoundVolume: 0.2

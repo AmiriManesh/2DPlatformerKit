@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class Enemy : PhysicsObject
 {
+    [Header("Attributes")]
     [SerializeField] private float maxSpeed;
     private int direction = 1;
-    private RaycastHit2D rightLedgeRaycastHit;
-    private RaycastHit2D leftLedgeRaycastHit;
-    private RaycastHit2D rightWallRaycastHit;
-    private RaycastHit2D leftWallRaycastHit;
     [SerializeField] private LayerMask rayCastLayerMask; //Which layer do we want the raycast to interact with?
     [SerializeField] private Vector2 rayCastOffset;//Offset from the center of the raycast origin
     [SerializeField] private float rayCastLength = 2;
     [SerializeField] private int attackPower = 10;
     public int health = 100;
     private int maxHealth = 100;
+
+    [Header("Refrences")]
+    private RaycastHit2D rightLedgeRaycastHit;
+    private RaycastHit2D leftLedgeRaycastHit;
+    private RaycastHit2D rightWallRaycastHit;
+    private RaycastHit2D leftWallRaycastHit;
+
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private float hurtSoundVolume = 1f;
+    [SerializeField] private float deathSoundVolume = 1f;
 
     void Start()
     {
@@ -50,8 +59,15 @@ public class Enemy : PhysicsObject
         //if health <0 , destroy me
         if (health <= 0)
         {
+            NewPlayer.Instance.sfxAudiosource.PlayOneShot(deathSound , deathSoundVolume);
             Destroy(gameObject);
         }
+    }
+
+    public void Hurt(int attackPower = 1)
+    {
+        health -= attackPower;
+        NewPlayer.Instance.sfxAudiosource.PlayOneShot(hurtSound , hurtSoundVolume);
     }
 
     //If i collide with the player, hurt the player (health is going to decrease, update the UI)
@@ -64,8 +80,7 @@ public class Enemy : PhysicsObject
         if (collision.gameObject == NewPlayer.Instance.gameObject)
         {
             //Hurt the playr , then update the UI!
-            NewPlayer.Instance.health -= attackPower;
-            NewPlayer.Instance.UpdateUI();
+            NewPlayer.Instance.Hurt();
         }
     }
 }
