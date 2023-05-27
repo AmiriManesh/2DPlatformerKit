@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadTrigger : MonoBehaviour
 {
     [SerializeField] private string loadSceneString;
+    [SerializeField] private bool destroyPlayer;
     void Start()
     {
         
@@ -21,7 +22,12 @@ public class SceneLoadTrigger : MonoBehaviour
         if (col.gameObject == NewPlayer.Instance.gameObject)
         {
             SceneManager.LoadScene(loadSceneString);
-            NewPlayer.Instance.SetSpawnPosition();
+            //NewPlayer.Instance.SetSpawnPosition();
+            if(destroyPlayer)
+            {
+                Destroy(NewPlayer.Instance.gameObject);
+                Destroy(GameManager.Instance.gameObject);
+            }
         }
     }
 }

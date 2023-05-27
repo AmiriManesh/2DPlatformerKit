@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class AnimatorFunctions : MonoBehaviour
 {
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem particleSystem1;
+    [SerializeField] private int emitAmount1;
+    [SerializeField] private ParticleSystem particleSystem2;
+    [SerializeField] private int emitAmount2;
+    [SerializeField] private ParticleSystem particleSystem3;
+    [SerializeField] private int emitAmount3;
+    [SerializeField] private ParticleSystem particleSystem4;
+    [SerializeField] private int emitAmount4;
+    [SerializeField] private ParticleSystem particleSystem5;
+    [SerializeField] private int emitAmount5;
+
+
     [Header("Sound Bank")]
     [SerializeField] private AudioClip[] sound1;
     [SerializeField] private float sound1Volume = 1f;
@@ -77,6 +90,31 @@ public class AnimatorFunctions : MonoBehaviour
     public void PlaySound10()
     {
         NewPlayer.Instance.sfxAudiosource.PlayOneShot(sound10[Random.Range(0,sound10.Length)] , sound10Volume);
+    }
+
+    public void EmitParticles1()
+    {
+        particleSystem1.Emit(emitAmount1);
+    }
+
+    public void EmitParticles2()
+    {
+        particleSystem2.Emit(emitAmount2);
+    }
+
+    public void EmitParticles3()
+    {
+        particleSystem3.Emit(emitAmount3);
+    }
+
+    public void EmitParticles4()
+    {
+        particleSystem4.Emit(emitAmount4);
+    }
+
+    public void EmitParticles5()
+    {
+        particleSystem5.Emit(emitAmount5);
     }
 
 }

@@ -11,6 +11,8 @@ public class Collectable : MonoBehaviour
     [SerializeField] private AudioClip collectionSound;
     [SerializeField] private float collectionSoundVolume = 1f;
 
+    [SerializeField] private ParticleSystem particleCollectableGlitter;
+
     void Start()
     {
         
@@ -27,6 +29,12 @@ public class Collectable : MonoBehaviour
         if (collision.gameObject == NewPlayer.Instance.gameObject)
         {
             if(collectionSound) NewPlayer.Instance.sfxAudiosource.PlayOneShot(collectionSound,collectionSoundVolume*Random.Range(0.8f,1.4f));
+            if(particleCollectableGlitter)
+            {
+                particleCollectableGlitter.transform.parent = null;
+                Destroy(particleCollectableGlitter.gameObject , particleCollectableGlitter.main.duration);
+                particleCollectableGlitter.gameObject.SetActive(true);
+            }
             if(itemType == ItemType.Coin)
             {
                 NewPlayer.Instance.coinsCollected += 1;

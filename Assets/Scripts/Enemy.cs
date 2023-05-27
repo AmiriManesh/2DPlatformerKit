@@ -15,10 +15,12 @@ public class Enemy : PhysicsObject
     private int maxHealth = 100;
 
     [Header("Refrences")]
+    [SerializeField] private Animator animator;
     private RaycastHit2D rightLedgeRaycastHit;
     private RaycastHit2D leftLedgeRaycastHit;
     private RaycastHit2D rightWallRaycastHit;
     private RaycastHit2D leftWallRaycastHit;
+    [SerializeField] private ParticleSystem particleEnemyExplosion;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip hurtSound;
@@ -59,7 +61,13 @@ public class Enemy : PhysicsObject
         //if health <0 , destroy me
         if (health <= 0)
         {
+            NewPlayer.Instance.StartCoroutine(NewPlayer.Instance.FreezeEffect(0.3f , 0.4f));
             NewPlayer.Instance.sfxAudiosource.PlayOneShot(deathSound , deathSoundVolume);
+            //NewPlayer.Instance.cameraEffects.Shake(5f,0.5f);
+            //NewPlayer.Instance.cameraEffects.ShakeCamera();
+            particleEnemyExplosion.transform.parent = null;
+            particleEnemyExplosion.gameObject.SetActive(true);
+            Destroy(particleEnemyExplosion.gameObject , particleEnemyExplosion.main.duration);
             Destroy(gameObject);
         }
     }
@@ -67,20 +75,7 @@ public class Enemy : PhysicsObject
     public void Hurt(int attackPower = 1)
     {
         health -= attackPower;
+        animator.SetTrigger("hurt");
         NewPlayer.Instance.sfxAudiosource.PlayOneShot(hurtSound , hurtSoundVolume);
-    }
-
-    //If i collide with the player, hurt the player (health is going to decrease, update the UI)
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        /*if(collision.gameObject.tag == "Enemy" && rightLedgeRaycastHit)
-        {
-            direction = -1;
-        }*/
-        if (collision.gameObject == NewPlayer.Instance.gameObject)
-        {
-            //Hurt the playr , then update the UI!
-            NewPlayer.Instance.Hurt();
-        }
     }
 }

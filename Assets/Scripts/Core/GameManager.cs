@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Text coinsText;
     public Image healthBar;
     public Image inventoryItemImage;
+    public Animator uiAnimator;
 
     private static GameManager instance;
     public static GameManager Instance
